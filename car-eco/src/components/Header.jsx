@@ -2,6 +2,7 @@
 import React from "react";
 import { UserButton, useUser } from "@clerk/clerk-react";
 import { Button } from "./ui/button";
+import { Link } from "react-router-dom";
 
 const Header = () => {
   // eslint-disable-next-line no-unused-vars
@@ -28,7 +29,9 @@ const Header = () => {
       {isSignedIn ? (
         <div className=" flex gap-5 items-center">
           <UserButton />
+          <Link to={'/profile'}>
           <Button>Submit Listing</Button>
+          </Link>
         </div>
       ) : (
         <Button>Submit Listing</Button>
