@@ -8,12 +8,13 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import PropTypes from "prop-types";
-const DropDownField = ({item,handleInputChange}) => {
+const DropDownField = ({item,handleInputChange,carInfo}) => {
   return (
     <div>
-      <Select onValueChange={(value)=>handleInputChange(item.name,value)} required={item.required}>
+      <Select onValueChange={(value)=>handleInputChange(item.name,value)} required={item.required}
+        defaultValue={carInfo?.[item.name]}>
         <SelectTrigger className="w-full">
-          <SelectValue placeholder={item.label} />
+          <SelectValue placeholder={carInfo?.[item.name]?carInfo?.[item.name]:item.label} />
         </SelectTrigger>
         <SelectContent>
           <SelectItem value="light">Light</SelectItem>
@@ -28,6 +29,8 @@ const DropDownField = ({item,handleInputChange}) => {
 DropDownField.propTypes = {
     item: PropTypes.any,
     handleInputChange: PropTypes.any,
+    carInfo: PropTypes.any,
+    
   };
 
 export default DropDownField;

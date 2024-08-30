@@ -6,14 +6,29 @@ import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { IoMdCloseCircle } from "react-icons/io";
 import { db } from '../../../configs';
 import { carImages } from '../../../configs/schema';
-const UploadImages = ({triggerUploadImages,setLoading}) => {
+import { eq } from 'drizzle-orm';
+const UploadImages = ({triggerUploadImages,setLoading,carInfo,mode}) => {
+    console.log("UploadImages",carInfo);
+    
     const [selectedFiles,setSelectedFiles] = useState([])
+    const [EditCarImageList,setEditCarImageList] = useState([])
+
+    useEffect(() =>{
+        if(mode=="edit"){
+            setEditCarImageList([])
+            carInfo?.images?.forEach((image)=>{
+                setEditCarImageList((perv)=>[...perv,image?.imageUrl])
+                console.log("image");
+                console.log(image);
+                
+            })
+        }
+    },[mode,carInfo])
     useEffect(() =>{
         if(triggerUploadImages){
             onUploadImages()
         }
     })
-
     const onFileSelected = (event)=>{
         const files = event.target.files
         console.log(files);
@@ -56,10 +71,25 @@ const UploadImages = ({triggerUploadImages,setLoading}) => {
         setLoading(false)
         });
     }
+    const onImageRemoveFromDB=async(image,index)=>{
+         await db.delete(carImages).where(eq(carImages.id,carInfo?.images[index]?.id))
+
+        const imageList = EditCarImageList.filter(item=> item != image)
+        setEditCarImageList(imageList)
+
+        
+    }
   return (
     <div>
         <h2 className='font-medium text-xl my-3'>Upload car Image</h2>
         <div className=' grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-5 '>
+            {mode=="edit"&& EditCarImageList.map((image,index) =>(
+                <div key={index}>
+                    <h2 className=''><IoMdCloseCircle  className='absolute h-7  text-lg m-1 cursor-pointer hover:shadow-md'
+                    onClick={()=>onImageRemoveFromDB(image,index)}/></h2>
+                    <img src={image} alt="images list" className=' w-full h-[130] object-cover rounded-xl' />
+                </div>
+            ))}
             {selectedFiles.map((image,index) =>(
                 <div key={index}>
                     <h2 className=''><IoMdCloseCircle  className='absolute h-7  text-lg m-1 cursor-pointer hover:shadow-md'
@@ -81,5 +111,7 @@ const UploadImages = ({triggerUploadImages,setLoading}) => {
 UploadImages.propTypes = {
     triggerUploadImages: PropTypes.any,
     setLoading: PropTypes.any,
+    carInfo: PropTypes.any,
+    mode: PropTypes.any,
   };
 export default UploadImages
