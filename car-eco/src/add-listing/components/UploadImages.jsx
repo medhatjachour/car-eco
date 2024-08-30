@@ -5,7 +5,7 @@ import  {storage}  from '../../../configs/firebaseConfing';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { IoMdCloseCircle } from "react-icons/io";
 import { db } from '../../../configs';
-import { CarImages } from '../../../configs/schema';
+import { carImages } from '../../../configs/schema';
 const UploadImages = ({triggerUploadImages,setLoading}) => {
     const [selectedFiles,setSelectedFiles] = useState([])
     useEffect(() =>{
@@ -45,7 +45,7 @@ const UploadImages = ({triggerUploadImages,setLoading}) => {
             }).then(res=>{
                 getDownloadURL(storageRef).then(async(downloadURL) =>{
                     if(downloadURL){
-                        await db.insert(CarImages).values({
+                        await db.insert(carImages).values({
                             imageUrl:downloadURL,
                             carListingId:triggerUploadImages
                         })

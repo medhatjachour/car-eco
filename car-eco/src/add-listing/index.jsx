@@ -1,5 +1,5 @@
 // eslint-disable-next-line no-unused-vars
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Header from "@/components/Header";
 import carDetails from "../Shared/carDetails.json";
 import features from "../Shared/features.json";
@@ -10,21 +10,41 @@ import { Separator } from "@/components/ui/separator";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 import { db } from "../../configs";
-import { carListing } from "../../configs/schema";
+import {  eq } from "drizzle-orm";
+import { carListing ,carImages} from "../../configs/schema";
 import IconField from "./components/IconField";
 import UploadImages from "./components/UploadImages";
 import { AiOutlineLoading3Quarters } from "react-icons/ai";
-// eslint-disable-next-line no-unused-vars
-import { Toaster } from "../components/ui/sonner";
-import { useNavigate } from "react-router-dom";
+// import { Toaster } from "../components/ui/sonner";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { useUser } from "@clerk/clerk-react";
+import Service from "../Shared/Service";
 const AddListing = () => {
   const [formData, setFormData] = useState([]);
   const [featuresData, setFeaturesData] = useState([]);
   const [triggerUploadImages, setTriggerUploadImages] = useState();
   const [loading , setLoading ]= useState(false);
-  const user = useUser()
+  const [searchParams] = useSearchParams()
   const navigate = useNavigate()
+  const {user} = useUser()
+  const mode = searchParams.get('mode')
+  const recordId = searchParams.get('id')
+  useEffect(() => {
+    if(mode=="edit"){
+       getListingDetail();
+      }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  const getListingDetail = async () => {
+    const result = await db
+      .select()
+      .from(carListing)
+      .leftJoin(carImages, eq(carListing.id, carImages.carListingId))
+      .where(eq(carListing.id, recordId));
+      const resp = Service.FormatResult(result);
+    console.log("the res",resp);
+    
+  }
   /**
    * used to save features data
    * @param {*} name
@@ -35,7 +55,6 @@ const AddListing = () => {
       ...prevData,
       [name]: value,
     }));
-    console.log(featuresData);
   };
   // used to captures input
   const handleInputChange = (name, value) => {
@@ -47,8 +66,6 @@ const AddListing = () => {
   const onSubmit = async (e) => {
     setLoading(true)
     e.preventDefault();
-    console.log(formData);
-
     try {
       const result = await db
         .insert(carListing)

@@ -23,11 +23,10 @@ export const carListing = pgTable('carListing',{
     offerType:varchar('offerType'),
     listingDescription:varchar('listingDescription'),
     features:json("features"),
-    createdBy:varchar('createdBy'),
-    // createdBy:varchar('createdBy').notNull(),
+    createdBy:varchar('createdBy').notNull(),
     postedOn:varchar('postedOn'),
 })
-export const CarImages = pgTable('carImages',{
+export const carImages = pgTable('carImages',{
     id:serial('id').primaryKey(),
     imageUrl:varchar('imageUrl').notNull(),
     carListingId:integer("carListingId").notNull().references(()=>carListing.id)
