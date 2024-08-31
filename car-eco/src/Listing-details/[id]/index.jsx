@@ -10,6 +10,10 @@ import Service from "@/Shared/Service";
 import ImageGallery from "../components/ImageGallery";
 import Description from "../components/Description";
 import Features from "../components/Features";
+import Pricing from "../components/Pricing";
+import Specifications from "../components/Specifications";
+import OwnerDetail from "../components/OwnerDetail";
+import Footer from "@/components/Footer";
 
 const ListingDetails = () => {
   const { id } = useParams();
@@ -51,11 +55,15 @@ const ListingDetails = () => {
           {/* right */}
           <div className="">
             {/* pricing */}
-            {/* car properties */}
+            <Pricing  carDetails = {carDetails}/>
+            {/* car specifications */}
+            <Specifications carDetails = {carDetails}/>
             {/* owner details */}
+            <OwnerDetail carDetails={carDetails}/>
           </div>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 };

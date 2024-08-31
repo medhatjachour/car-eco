@@ -81,7 +81,9 @@ const AddListing = () => {
           .set({
             ...formData,
             features: featuresData,
-            createdBy: user?.primaryEmailAddress?.emailAddress,
+            createdBy: user?.primaryEmailAddress?.emailAddress, //get user information from clerk
+            userName:user?.fullName,
+            userImageUrl:user?.imageUrl,
             postedOn: new Date(),
           })
           .where(eq(carListing.id, recordId))

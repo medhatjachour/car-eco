@@ -24,6 +24,8 @@ export const carListing = pgTable('carListing',{
     listingDescription:varchar('listingDescription'),
     features:json("features"),
     createdBy:varchar('createdBy').notNull(),
+    userName:varchar('userName').notNull().default("anonymous"),
+    userImageUrl:varchar('userImageUrl').notNull().default("https://firebasestorage.googleapis.com/v0/b/car-eco-76608.appspot.com/o/car-images%2F11635109631.png?alt=media&token=08179d02-adc3-47d4-ab50-731c290f0e29"),
     postedOn:varchar('postedOn'),
 })
 export const carImages = pgTable('carImages',{

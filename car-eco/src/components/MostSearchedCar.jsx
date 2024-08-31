@@ -24,7 +24,7 @@ const MostSearchedCar = () => {
       .from(carListing)
       .leftJoin(carImages, eq(carListing.id, carImages.carListingId))
       .orderBy(desc(carListing.id))
-      .limit(10);
+      .limit(15);
     // .where(eq(carListing.createdBy, user?.primaryEmailAddress?.emailAddress));
     const resp = Service.FormatResult(result);
     setCarList(resp);
