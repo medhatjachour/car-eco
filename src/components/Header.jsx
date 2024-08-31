@@ -37,8 +37,8 @@ const Header = () => {
         </div>
       ) : (
         <div>
-          <SignInButton mode="model" />
-          <Button>Submit Listing</Button>
+          <SignInButton className="bg-primary text-white py-1 px-4 rounded-md" mode="model" />
+          {/* <Button>Submit Listing</Button> */}
         </div>
       )}
     </div>
