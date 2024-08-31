@@ -9,9 +9,8 @@ import { MdOpenInNew } from "react-icons/md";
 import { Link, useParams } from "react-router-dom";
 const CarItem = ({ car }) => {
   const {id} = useParams()
-  
   return (
-    <Link to={"Listing-details/"+car.id}>
+    <Link to={"/Listing-details/"+car.id}>
     <div className=" rounded-xl bg-white border hover:shadow-md " data={id}>
       <h2 className="absolute m-2 bg-green-600 px-2 rounded-full  text-sm text-white">New</h2>
       <img
