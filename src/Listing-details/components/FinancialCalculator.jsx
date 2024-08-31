@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
+// eslint-disable-next-line no-unused-vars
 const FinancialCalculator = ({ carDetails }) => {
   const [carPrice, setCarPrice] = useState(0);
   const [interest, setInterest] = useState(0);
