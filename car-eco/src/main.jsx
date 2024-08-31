@@ -11,6 +11,8 @@ import Profile from "./profile";
 import AddListing from "./add-listing";
 import { Toaster } from "@/components/ui/sonner"
 import SearchByCategory from "./search/[category]";
+import SearchByOptions from "./search";
+import ListingDetails from "./Listing-details/[id]";
  
 
 // Import your publishable key
@@ -34,8 +36,16 @@ const router = createBrowserRouter([
     element: <AddListing />,
   },
   {
+    path: "/search/",
+    element: <SearchByOptions />,
+  },
+  {
     path: "/search/:category",
     element: <SearchByCategory />,
+  },
+  {
+    path: "/Listing-details/:id",
+    element: <ListingDetails />,
   },
 ]);
 createRoot(document.getElementById("root")).render(

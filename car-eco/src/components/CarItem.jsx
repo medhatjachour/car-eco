@@ -6,9 +6,13 @@ import { BsFuelPumpDiesel } from "react-icons/bs";
 import { IoSpeedometerOutline } from "react-icons/io5";
 import { GiGearStickPattern } from "react-icons/gi";
 import { MdOpenInNew } from "react-icons/md";
+import { Link, useParams } from "react-router-dom";
 const CarItem = ({ car }) => {
+  const {id} = useParams()
+  
   return (
-    <div className=" rounded-xl bg-white border hover:shadow-md ">
+    <Link to={"Listing-details/"+car.id}>
+    <div className=" rounded-xl bg-white border hover:shadow-md " data={id}>
       <h2 className="absolute m-2 bg-green-600 px-2 rounded-full  text-sm text-white">New</h2>
       <img
         src={car?.images[0]?.imageUrl}
@@ -42,12 +46,11 @@ const CarItem = ({ car }) => {
           </h2>
         </div>
       </div>
-    </div>
+    </div></Link>
   );
 };
 CarItem.propTypes = {
   car: PropTypes.any,
-  type: PropTypes.any,
 };
 
 export default CarItem;
