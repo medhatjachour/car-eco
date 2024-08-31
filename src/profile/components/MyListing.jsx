@@ -41,11 +41,12 @@ const MyListing = () => {
   const deleteList = async (item) => {
     console.log(item.id);
 
-    // const deleted = await db.delete(carListing).where(eq(carListing.id,item.id))
-    // if (deleted) {
-    //   console.log("deleted");
-    // }
-    // console.log(deleted);
+    const deleted = await db.delete(carListing).where(eq(carListing.id,item.id))
+    if (deleted) {
+      console.log("deleted");
+      getUserCarListing()
+    }
+    console.log(deleted);
   };
   return (
     <div>
