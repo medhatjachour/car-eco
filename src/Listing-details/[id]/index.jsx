@@ -24,8 +24,9 @@ const ListingDetails = () => {
 
   useEffect(() => {
     getCarDetails();
+    window.scrollTo({ top: 0, left: 0, behavior: 'smooth' })
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [id]);
 
   const getCarDetails = async () => {
     const result = await db
