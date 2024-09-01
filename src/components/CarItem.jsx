@@ -12,7 +12,7 @@ const CarItem = ({ car }) => {
   return (
     <Link to={"/Listing-details/"+car.id}>
     <div className=" rounded-xl bg-white border hover:shadow-md " data={id}>
-      <h2 className={`absolute m-2 rounded-full  text-sm text-white px-3 py-1  ${car?.condition=="New"?"bg-green-600":"bg-orange-600"}  ${car?.condition=="Used"&&"bg-red-500"}`} >{car?.condition}</h2>
+      <h2 className={`absolute m-2 rounded-full  text-sm text-white px-3 py-1  ${car?.condition=="New"?"bg-green-600":"bg-orange-600 text-nowrap"}  ${car?.condition=="Used"&&"bg-red-500"}`} >{car?.condition}</h2>
       <img
         src={car?.images[0]?.imageUrl}
         width={'100%'}
