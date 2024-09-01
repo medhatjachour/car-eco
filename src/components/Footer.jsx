@@ -5,6 +5,7 @@ const Footer = () => {
   const form = useRef();
   const sendEmail = (e) => {
     e.preventDefault();
+  
     emailjs
       .sendForm("service_yj43zea", "template_ffsp2p9", form.current, {
         publicKey: "_FkWIN19KFOMC24eu",
@@ -34,7 +35,7 @@ const Footer = () => {
                 Your Name{" "}
               </label>
               <input
-                className="w-full rounded-full border-gray-200 bg-gray-100 p-4 pe-32 text-sm font-medium"
+                className="w-full rounded-md  border-gray-200 bg-gray-100 p-4 pe-32 text-sm font-medium"
                 id="user_name"
                 type="text"
                  name="user_name"
@@ -44,7 +45,7 @@ const Footer = () => {
                 Message
               </label>
               <textarea
-                className="w-full rounded-lg border-gray-200 p-3 text-sm"
+                className="w-full rounded-md my-3 border-gray-200 bg-gray-100 p-4 pe-32 text-sm font-medium"
                 placeholder="Message"
                 rows="8"
                 name="message"
@@ -57,13 +58,13 @@ const Footer = () => {
                 Email{" "}
               </label>
               <input
-                className="w-full rounded-full border-gray-200 bg-gray-100 p-4 pe-32 text-sm font-medium"
+                className="w-full rounded-md border-gray-200 bg-gray-100 p-4 pe-32 text-sm font-medium"
                 id="email"
                 type="email"
                 name="user_email"
                 placeholder="john@doe.com"
               />
-              <button className="absolute end-1 top-1/2 -translate-y-1/2 rounded-full bg-primary px-5 py-3 text-sm font-medium text-white transition hover:bg-white hover:text-primary hover:border-primary">
+              <button className="absolute end-1 top-1/2 -translate-y-1/2 rounded-md border-2 bg-primary px-5 py-3 text-sm font-medium text-white transition hover:bg-white hover:text-primary hover:border-primary">
                 Send
               </button>
             </div>
