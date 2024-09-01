@@ -32,7 +32,7 @@ const Header = () => {
         <div className=" flex gap-5 items-center">
           <UserButton />
           <Link to={"/profile"}>
-            <Button>Submit Listing</Button>
+            <Button className="hover:bg-slate-100 hover:text-primary hover:border-primary border-2">Submit Listing</Button>
           </Link>
         </div>
       ) : (
