@@ -4,8 +4,13 @@ import emailjs from "@emailjs/browser";
 const Footer = () => {
   const form = useRef();
   const sendEmail = (e) => {
+    // console.log(e);
+    console.log(e.target[0].value);
+    
     e.preventDefault();
-  
+  if(!e.target[0].value && !e.target[1].value&& !e.target[2].value){
+    console.log("enter");
+  }else{
     emailjs
       .sendForm("service_yj43zea", "template_ffsp2p9", form.current, {
         publicKey: "_FkWIN19KFOMC24eu",
@@ -17,7 +22,7 @@ const Footer = () => {
         (error) => {
           console.log("FAILED...", error.text);
         }
-      );
+      );}
   };
 
   return (
